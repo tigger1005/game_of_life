@@ -2,10 +2,10 @@ use itertools::Itertools;
 use nannou::prelude::*;
 use rand::random;
 
-const SCALE: f32 = 5.0;
-const GRID_SIZE_X: f32 = 150.0;
-const GRID_SIZE_Y: f32 = 100.0;
-const UPDATE_TIME: f32 = 0.05;
+const SCALE: f32 = 16.0;
+const GRID_SIZE_X: f32 = 60.0;
+const GRID_SIZE_Y: f32 = 40.0;
+const UPDATE_TIME: f32 = 0.1;
 
 fn main() {
     nannou::app(model).update(update).run();
@@ -74,13 +74,12 @@ impl Model {
     }
 
     fn draw(&self, draw: &Draw) {
+        let color = [GRAY, YELLOW];
         for ((x, y), element) in self.screen.iter_elements() {
-            if *element == 1 {
-                draw.rect()
-                    .x_y(x as f32, y as f32)
-                    .w_h(0.9, 0.9)
-                    .color(BLACK);
-            }
+            draw.rect()
+                .x_y(x as f32, y as f32)
+                .w_h(0.9, 0.9)
+                .color(color[*element as usize]);
         }
     }
 }
@@ -128,6 +127,7 @@ fn view(app: &App, m: &Model, frame: Frame) {
         .scale(SCALE)
         .x_y(-((GRID_SIZE_X / 2.0) - 0.5), -GRID_SIZE_Y / 2.0 + 0.5);
     draw.background().color(LIGHTGRAY);
+
     // Draw field
     m.draw(&draw);
     // Write the result of our drawing to the window's frame.
