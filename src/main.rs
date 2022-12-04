@@ -44,7 +44,7 @@ impl Canvas {
 
     fn get_value(&self, mut x: isize, mut y: isize) -> u8 {
         x = (x + self.elements.len() as isize) % self.elements.len() as isize;
-        y = (y +self. elements[0].len() as isize) % self.elements[0].len() as isize;
+        y = (y + self.elements[0].len() as isize) % self.elements[0].len() as isize;
         self.elements[x as usize][y as usize]
     }
 
@@ -108,13 +108,6 @@ fn update(app: &App, m: &mut Model, _update: Update) {
     }
 }
 
-fn event(_app: &App, _m: &mut Model, event: WindowEvent) {
-    match event {
-        MousePressed(_button) => {}
-        _other => (),
-    }
-}
-
 fn model(app: &App) -> Model {
     let _window = app
         .new_window()
@@ -123,7 +116,6 @@ fn model(app: &App) -> Model {
             GRID_SIZE_Y as u32 * SCALE as u32,
         )
         .view(view)
-        .event(event)
         .build()
         .unwrap();
     Model::new()
