@@ -1,5 +1,5 @@
 use itertools::Itertools;
-use nannou::{draw::primitive::ellipse, prelude::*};
+use nannou::prelude::*;
 use rand::random;
 
 const SCALE: f32 = 16.0;
