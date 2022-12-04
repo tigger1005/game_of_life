@@ -1,5 +1,5 @@
 use itertools::Itertools;
-use nannou::prelude::*;
+use nannou::{draw::primitive::ellipse, prelude::*};
 use rand::random;
 
 const SCALE: f32 = 16.0;
@@ -92,17 +92,9 @@ fn update(app: &App, m: &mut Model, _update: Update) {
         let leap = m.screen;
 
         for ((x, y), element) in leap.iter_elements() {
-            m.screen.elements[x][y] = match leap.get_neighbors(x, y) {
-                0 | 1 | 4 | 5 | 6 | 7 | 8 => 0, // Death
-                n @ 2..=3 => {
-                    if *element == 0 && n == 2 {
-                        0 // stay dead
-                    } else {
-                        1 // live
-                    }
-                }
-                _ => 0,
-            }
+            let n = leap.get_neighbors(x, y);
+            // Game of life rules
+            m.screen.elements[x][y] = (n == 3 || (*element == 1 && n == 2)) as u8;
         }
     }
 }
