@@ -4,7 +4,7 @@ use rand::random;
 
 const SCALE: f32 = 5.0;
 const GRID_SIZE_X: f32 = 150.0;
-const GRID_SIZE_Y: f32 = 150.0;
+const GRID_SIZE_Y: f32 = 100.0;
 const UPDATE_TIME: f32 = 0.05;
 
 fn main() {
@@ -13,21 +13,21 @@ fn main() {
 
 #[derive(Copy, Clone)]
 struct Canvas {
-    elements: [[u8; GRID_SIZE_X as usize]; GRID_SIZE_Y as usize],
+    elements: [[u8; GRID_SIZE_Y as usize]; GRID_SIZE_X as usize],
 }
 
 impl Canvas {
     fn new() -> Self {
         let mut temp: Canvas = Canvas {
-            elements: [[0; GRID_SIZE_X as usize]; GRID_SIZE_Y as usize],
+            elements: [[0; GRID_SIZE_Y as usize]; GRID_SIZE_X as usize],
         };
 
         // for ((x,y),element) in &mut temp.iter_elements() {
         //     *element = random::<u8>() % 2;
         // }
 
-        for x in 0..GRID_SIZE_X as usize {
-            for y in 0..GRID_SIZE_Y as usize {
+        for x in 0..temp.elements.len() as usize {
+            for y in 0..temp.elements[0].len() as usize {
                 temp.elements[x][y] = random::<u8>() % 2;
             }
         }
@@ -43,8 +43,8 @@ impl Canvas {
     }
 
     fn get_value(&self, mut x: isize, mut y: isize) -> u8 {
-        x = (x + GRID_SIZE_X as isize) % GRID_SIZE_X as isize;
-        y = (y + GRID_SIZE_Y as isize) % GRID_SIZE_Y as isize;
+        x = (x + self.elements.len() as isize) % self.elements.len() as isize;
+        y = (y +self. elements[0].len() as isize) % self.elements[0].len() as isize;
         self.elements[x as usize][y as usize]
     }
 
