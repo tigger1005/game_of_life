@@ -675,6 +675,7 @@ version = "0.1.0"
 dependencies = [
  "itertools",
  "nannou",
+ "rand 0.7.3",
 ]
 
 [[package]]

@@ -8,3 +8,5 @@ edition = "2021"
 [dependencies]
 nannou = "0.18.1"
 itertools = "*"
+rand = "*"
+
